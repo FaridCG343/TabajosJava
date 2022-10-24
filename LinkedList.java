@@ -1,13 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
-package com.mycompany.linkedlist;
-
-/**
- *
- * @author 701
- */
 public class LinkedList<E> {
 
     private Nodo i, f;
@@ -117,6 +107,14 @@ public class LinkedList<E> {
         if (posicion < 0 || posicion > length) {
             return;
         }
+        if(length==1){
+            this.eliminarFinal();
+            return;
+        }
+        if(posicion==length){
+            this.eliminarFinal();
+            return;
+        }
         Nodo aux = i;
         while (posicion != 1) {
             posicion--;
@@ -126,5 +124,6 @@ public class LinkedList<E> {
         Nodo sig = aux.siguiente;
         ant.siguiente = sig;
         sig.anterior = ant;
+        length--;
     }
 }
