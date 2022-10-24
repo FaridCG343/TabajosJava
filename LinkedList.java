@@ -46,6 +46,9 @@ public class LinkedList<E> {
 
     public String recorrer() {
         String cadena = "";
+        if(length==0){
+            return "";
+        }
         Nodo aux = i;
         while (aux != null) {
             cadena += aux.dato + " ";
@@ -57,6 +60,9 @@ public class LinkedList<E> {
     public String recorrerInv() {
         String cadena = "";
         Nodo aux = f;
+        if(length==0){
+            return "";
+        }
         while (aux != null) {
             cadena += aux.dato + " ";
             aux = aux.anterior;
@@ -73,6 +79,10 @@ public class LinkedList<E> {
 
     public void eliminarFinal() {
         if (length != 0) {
+            if(length==1){
+                this.eliminarInicio();
+                return;
+            }
             f = f.anterior;
             f.siguiente = null;
             length--;
@@ -108,7 +118,7 @@ public class LinkedList<E> {
             return;
         }
         if(length==1){
-            this.eliminarFinal();
+            this.eliminarInicio();
             return;
         }
         if(posicion==length){
