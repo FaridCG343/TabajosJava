@@ -136,4 +136,11 @@ public class LinkedList<E> {
         sig.anterior = ant;
         length--;
     }
+    
+    public E getFV(){
+        if(f!=null){
+            return (E) f.dato;
+        }
+        return null;
+    }
 }
