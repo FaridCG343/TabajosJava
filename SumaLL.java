@@ -2,32 +2,41 @@ public class SumaLL {
     static Scanner teclado = new Scanner(System.in);
     public static void main(String[] args) {
         int dato;
-        LinkedList<Integer> l1 = new LinkedList<>();
+        LinkedList<Integer> l1 = new LinkedList<>(), l2 = new LinkedList<>(), a1 = new LinkedList<>(), a2 = new LinkedList<>();
         System.out.println("Ingresa la longitud de la primera lista");
         int len = teclado.nextInt();
         System.out.println("Ingresa los valores");
         for(int i = 0; i < len; i++){
             dato = teclado.nextInt();
-            l1.insertarF(dato);
+            l1.insertarI(dato);
+            a1.insertarI(dato);
         }
-        LinkedList<Integer> l2 = new LinkedList<>();
+        
         System.out.println("Ingresa la longitud de la segunda lista");
         len = teclado.nextInt();
         System.out.println("Ingresa los valores");
         for(int i = 0; i < len; i++){
             dato = teclado.nextInt();
-            l2.insertarF(dato);
+            l2.insertarI(dato);
+            a2.insertarI(dato);
         }
         int suma;
+        LinkedList sum;
+        
         if(l1.getLength()>=l2.getLength()){
-            suma = calcularSuma(l1, l2);
+            
+            sum = sumaLL(a1, a2);
+            suma = sumaint(l1, l2);
         }else{
-            suma = calcularSuma(l2, l1);
+            
+            sum = sumaLL(a2, a1);
+            suma = sumaint(l2, l1);
         }
         System.out.println(suma);
+        System.out.println(sum.recorrer());
     }
     
-    public static int calcularSuma(LinkedList<Integer>l1, LinkedList<Integer>l2){
+    public static int sumaint(LinkedList<Integer>l1, LinkedList<Integer>l2){
         int sig = 0, aux;
         String res = "";
         while(l2.getLength()>0){
@@ -68,5 +77,44 @@ public class SumaLL {
             res += Character.toString(temp[i]);
         }
         return Integer.parseInt(res);
+    }
+    
+    public static LinkedList<Integer> sumaLL(LinkedList<Integer>l1, LinkedList<Integer>l2){
+        int sig = 0, aux;
+        LinkedList<Integer> res = new LinkedList<>();
+        while(l2.getLength()>0){
+            aux = l1.getFV() + l2.getFV();
+            if(sig>0){
+                aux+=sig;
+                sig = 0;
+            }
+            if(aux>9){
+                sig = (int)aux/10;
+                res.insertarF((int)aux%10);
+            }else{
+                res.insertarF(aux);
+            }
+            l1.eliminarFinal();
+            l2.eliminarFinal();
+        }
+        while(l1.getLength()>0){
+            aux = l1.getFV();
+            if(sig>0){
+                aux += sig;
+                sig = 0;
+            }
+            if(aux>9){
+                sig = (int)aux/10;
+                res.insertarF((int)aux%10);
+            }else{
+                res.insertarF(aux);
+            }
+            l1.eliminarFinal();
+        }
+        if(sig>0){
+            res.insertarF(sig);
+        }
+        System.out.println(res.recorrer());
+        return res;
     }
 }
