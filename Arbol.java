@@ -30,7 +30,6 @@ public class Arbol{
         if(dato.compareToIgnoreCase(R.toString())==0){
             return;
         }
-        System.out.println(a);
         if(dato.compareToIgnoreCase(R.toString())>0){ //Mayor
             if(R.der ==null){
                 Nodo<String> Q = new Nodo<>(dato);
@@ -48,6 +47,26 @@ public class Arbol{
             }
             insertarString(R.izq, dato, a);
         }
+    }
+    
+    public boolean buscar(String dato){
+        return buscar(R, dato);
+    }
+    
+    private boolean buscar(Nodo R, String dato){
+        if(dato.compareToIgnoreCase(R.toString())==0){
+            return true;
+        }
+        if(dato.compareToIgnoreCase(R.toString())>0){ //Mayor
+            if(R.der != null){
+                return buscar(R.der, dato);
+            }
+        }else{
+            if(R.izq != null){
+                return buscar(R.izq, dato);
+            }
+        }
+        return false;
     }
     
     public void recorrerIn() {
